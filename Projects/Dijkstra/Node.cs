@@ -9,8 +9,7 @@ public class Node
     public int gridX;
     public int gridY;
 
-    public int cost;
-    public float cumulativeCost;
+    public int weight;
     public Node parent;
 
     public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY)
@@ -19,6 +18,5 @@ public class Node
         worldPosition = _worldPos;
         gridX = _gridX;
         gridY = _gridY;
-        cumulativeCost = float.MaxValue;
     }
 }
