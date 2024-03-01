@@ -31,7 +31,7 @@ public class Dijkstra : MonoBehaviour
             Node currentNode = openSet[0];
             for (int i = 1; i < openSet.Count; i++)
             {
-                if (openSet[i].weight < currentNode.weight || openSet[i].weight == currentNode.weight)
+                if (openSet[i].cost < currentNode.cost || openSet[i].cost == currentNode.cost)
                 {
                     currentNode = openSet[i];
                 }
@@ -52,10 +52,10 @@ public class Dijkstra : MonoBehaviour
                     continue;
                 }
 
-                int newCostToNeighbour = currentNode.weight + GetDistance(currentNode, neighbour);
-                if (newCostToNeighbour < neighbour.weight || !openSet.Contains(neighbour))
+                int newCostToNeighbour = currentNode.cost + GetDistance(currentNode, neighbour);
+                if (newCostToNeighbour < neighbour.cost || !openSet.Contains(neighbour))
                 {
-                    neighbour.weight = newCostToNeighbour;
+                    neighbour.cost = newCostToNeighbour;
                     neighbour.parent = currentNode;
 
                     if (!openSet.Contains(neighbour))
