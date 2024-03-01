@@ -38,40 +38,22 @@ public class Grid : MonoBehaviour
     {
         List<Node> neighbours = new List<Node>();
 
-        List<(Node, float)> neighboursWithTentativeCosts = new List<(Node, float)>();
-
-        for (int x = -1; x <= 1; x++)
+        for (int x = -1; x <= 1; x++) 
         {
             for (int y = -1; y <= 1; y++)
             {
-                if (x == 0 && y == 0) continue; 
+                if (x == 0 && y == 0)
+                    continue;
 
                 int checkX = node.gridX + x;
                 int checkY = node.gridY + y;
 
-                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                if (checkX >= 0 && checkX < gridSizeX && checkY >=0 && checkY < gridSizeY)
                 {
-                    Node neighbour = grid[checkX, checkY];
-                    float additionalCost = (x == 0 || y == 0) ? 10 : 14; 
-                    float tentativeCumulativeCost = node.cumulativeCost + additionalCost;
-
-                    if (tentativeCumulativeCost < neighbour.cumulativeCost)
-                    {
-                        neighbour.cumulativeCost = tentativeCumulativeCost;
-                        neighbour.parent = node; 
-                        neighboursWithTentativeCosts.Add((neighbour, tentativeCumulativeCost));
-                    }
+                    neighbours.Add(grid[checkX,checkY]);
                 }
             }
         }
-
-        neighboursWithTentativeCosts.Sort((a, b) => a.Item2.CompareTo(b.Item2));
-
-        foreach (var item in neighboursWithTentativeCosts)
-        {
-            neighbours.Add(item.Item1);
-        }
-
         return neighbours;
     }
     public Node NodeFromWorldPoint(Vector3 worldPosition)
